@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "402418398161",
+    "project_id": "safemind-7d84c",
+    "storage_bucket": "safemind-7d84c.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:402418398161:android:a7f396e90dc58cd973e6f0",
+        "android_client_info": {
+          "package_name": "com.safemind.safmindapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAo9EWIf9uo1kezPteCkvYbGH5U7j662eY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
