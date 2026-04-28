@@ -21,3 +21,4 @@
 [2026-04-25 16:00:00] backend update 20 - Improved type safety in user deserialization
 [2026-04-26 16:00:00] backend update 21 - Created PostModel data structure
 [2026-04-27 16:00:00] backend update 22 - Implemented fromMap parsing for posts
+[2026-04-28 16:00:00] backend update 23 - Added support for nested Firestore data structures
