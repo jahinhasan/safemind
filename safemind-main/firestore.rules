@@ -1,0 +1,51 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return signedIn() && request.auth.uid == userId;
+    }
+
+    function isAdvisorOrAdmin() {
+      return signedIn() && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role in ['advisor', 'admin'];
+    }
+
+    function isAdmin() {
+      return signedIn() && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+
+    match /users/{userId} {
+      allow read: if isOwner(userId) || isAdvisorOrAdmin();
+      allow create, update: if isOwner(userId) || isAdvisorOrAdmin();
+      allow delete: if isAdvisorOrAdmin();
+    }
+
+    match /posts/{postId} {
+      allow read: if true;
+      allow create: if signedIn();
+      allow update: if signedIn();
+      allow delete: if isAdvisorOrAdmin();
+
+      match /comments/{commentId} {
+        allow read: if true;
+        allow create: if signedIn();
+        allow update, delete: if signedIn();
+      }
+    }
+
+    match /reports/{reportId} {
+      allow read: if isAdvisorOrAdmin();
+      allow create: if signedIn();
+      allow update, delete: if isAdvisorOrAdmin();
+    }
+
+    match /adminActivity/{activityId} {
+      allow read, create: if isAdmin();
+      allow update, delete: if false;
+    }
+  }
+}
